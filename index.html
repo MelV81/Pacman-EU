@@ -3,18 +3,18 @@
 <head>
     <title>Pac-Man EU-Quiz</title>
     <style>
-        body { text-align: center; font-family: Arial, sans-serif; }
-        canvas { background: #111; display: block; margin: auto; }
+        body { text-align: center; font-family: Arial, sans-serif; color: white; background-color: #000; }
+        canvas { background: #111; display: block; margin: auto; border: 2px solid white; }
         .quiz-container { margin-top: 20px; display: none; }
         .quiz-container button { display: block; margin: 5px auto; }
-        #scoreDisplay { color: white; font-size: 18px; margin-top: 10px; }
+        #scoreDisplay, #highscoreDisplay { font-size: 20px; margin: 5px; }
     </style>
 </head>
 <body>
     <h1>Pac-Man EU-Quiz</h1>
-    <p>Steuere Pac-Man mit den Pfeiltasten. Wenn du eine Frage richtig beantwortest, bekommst du 5 Punkte. Falsch = zurück zum Start!</p>
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
     <div id="scoreDisplay">Punkte: 0</div>
+    <div id="highscoreDisplay">Highscore: 0</div>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
     <div class="quiz-container" id="quiz-container">
         <p id="question"></p>
         <div id="answers"></div>
@@ -28,6 +28,7 @@
         const fruits = ["🍎", "🍌", "🍒", "🍇", "🍓", "🍍"];
         let fruit = { x: 200, y: 200, size: 10, active: true, type: fruits[Math.floor(Math.random() * fruits.length)] };
         let score = 0;
+        let highscore = 0;
         let correctAnswers = 0;
         let gamePaused = false;
 
@@ -39,6 +40,21 @@
 
         function updateScoreDisplay() {
             document.getElementById("scoreDisplay").innerText = `Punkte: ${score}`;
+            document.getElementById("highscoreDisplay").innerText = `Highscore: ${highscore}`;
+        }
+
+        function gameEnd() {
+            let bonus = correctAnswers === 30 ? 10 : 0;
+            if (bonus > 0) {
+                alert("Gratulation! Fehlerfreies Spiel! +10 Bonuspunkte");
+                score += bonus;
+            }
+            if (score > highscore) {
+                highscore = score;
+            }
+            updateScoreDisplay();
+            alert(`Spiel beendet! Gesamtpunktzahl: ${score}`);
+            document.location.reload();
         }
 
         function drawPacman() {
@@ -68,6 +84,10 @@
 
         function askQuestion() {
             gamePaused = true;
+            if (questions.length === 0) {
+                gameEnd();
+                return;
+            }
             const question = questions.splice(Math.floor(Math.random() * questions.length), 1)[0];
             document.getElementById("question").innerText = question.q;
             const answersDiv = document.getElementById("answers");
