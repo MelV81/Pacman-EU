@@ -7,12 +7,14 @@
         canvas { background: #111; display: block; margin: auto; }
         .quiz-container { margin-top: 20px; display: none; }
         .quiz-container button { display: block; margin: 5px auto; }
+        #scoreDisplay { color: white; font-size: 18px; margin-top: 10px; }
     </style>
 </head>
 <body>
     <h1>Pac-Man EU-Quiz</h1>
     <p>Steuere Pac-Man mit den Pfeiltasten. Wenn du eine Frage richtig beantwortest, bekommst du 5 Punkte. Falsch = zurück zum Start!</p>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div id="scoreDisplay">Punkte: 0</div>
     <div class="quiz-container" id="quiz-container">
         <p id="question"></p>
         <div id="answers"></div>
@@ -29,7 +31,15 @@
         let correctAnswers = 0;
         let gamePaused = false;
 
-        const questions = [...]; // Fragen wie vorher (gekürzt zur Übersicht)
+        const questions = [
+            { q: "Wie viele Mitgliedstaaten hat die Europäische Union aktuell?", o: ["19", "20", "27", "30"], a: "27" },
+            { q: "Welche Institution der EU ist direkt vom Volk gewählt?", o: ["Europäischer Rat", "Europäische Kommission", "Europäisches Parlament", "Ministerrat"], a: "Europäisches Parlament" },
+            // ... (weitere Fragen hier einfügen)
+        ];
+
+        function updateScoreDisplay() {
+            document.getElementById("scoreDisplay").innerText = `Punkte: ${score}`;
+        }
 
         function drawPacman() {
             ctx.beginPath();
@@ -78,6 +88,7 @@
                         score = 0;
                         correctAnswers = 0;
                     }
+                    updateScoreDisplay();
                     fruit = {
                         x: Math.random() * 360 + 20,
                         y: Math.random() * 360 + 20,
@@ -144,6 +155,7 @@
             requestAnimationFrame(draw);
         }
 
+        updateScoreDisplay();
         draw();
     </script>
 </body>
