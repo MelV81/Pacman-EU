@@ -30,59 +30,45 @@
         let score = 0;
         let highscore = 0;
         let correctAnswers = 0;
-        let questions.splice(questionIndex, 1);
-                    gamePaused = false;
+        let gamePaused = false;
 
+        // Fragen sollten hier vollständig definiert sein. Platzhalter für Übersichtlichkeit.
         const questions = [
-            { q: "Wie viele Mitgliedstaaten hat die Europäische Union aktuell?", o: ["19", "20", "27", "30"], a: "27" },
-            { q: "Welche Institution der EU ist direkt vom Volk gewählt?", o: ["Europäischer Rat", "Europäische Kommission", "Europäisches Parlament", "Ministerrat"], a: "Europäisches Parlament" },
-            { q: "Was sind die vier Grundfreiheiten der EU?", o: ["Gleichheit, Brüderlichkeit, Freiheit, Recht", "Warenverkehr, Personenfreizügigkeit, Dienstleistungen, Kapitalverkehr", "Meinungsfreiheit, Religionsfreiheit, Eigentumsfreiheit, Bewegungsfreiheit", "Staatsangehörigkeit, Reisen, Arbeit, Bildung"], a: "Warenverkehr, Personenfreizügigkeit, Dienstleistungen, Kapitalverkehr" },
-            { q: "Wann wurde die Europäische Union offiziell gegründet?", o: ["1945", "1957", "1973", "1992"], a: "1992" },
-            { q: "Welcher Vertrag gründete die EU?", o: ["Vertrag von Paris", "Vertrag von Maastricht", "Vertrag von Lissabon", "Römische Verträge"], a: "Vertrag von Maastricht" },
-            { q: "Welcher dieser Staaten ist KEIN Mitglied der EU?", o: ["Norwegen", "Polen", "Italien", "Spanien"], a: "Norwegen" },
-            { q: "Welche Währung nutzen die meisten EU-Staaten?", o: ["Euro", "Dollar", "Pfund", "Franken"], a: "Euro" },
-            { q: "Was bedeutet Personenfreizügigkeit in der EU?", o: ["Freier Zugang zu allen Unis", "Reisefreiheit nur für Männer", "Arbeiten, wohnen und studieren in jedem EU-Staat", "Kostenlose Staatsbürgerschaft"], a: "Arbeiten, wohnen und studieren in jedem EU-Staat" },
-            { q: "Welches Land ist KEIN Mitglied der Euro-Zone?", o: ["Deutschland", "Italien", "Ungarn", "Spanien"], a: "Ungarn" },
-            { q: "Welcher dieser Staaten gehört zur EU, aber nicht zur Eurozone?", o: ["Frankreich", "Dänemark", "Griechenland", "Österreich"], a: "Dänemark" },
-            { q: "Was fördert die EU mit ihren Agrarsubventionen?", o: ["Industrie", "Tourismus", "Landwirtschaft", "IT-Branche"], a: "Landwirtschaft" },
-            { q: "Was versteht man unter Binnenmarkt in der EU?", o: ["Nur lokaler Handel", "Gemeinsamer Markt ohne Grenzen", "Markt für Binnenstaaten", "Ein Markt für Lebensmittel"], a: "Gemeinsamer Markt ohne Grenzen" },
-            { q: "Was regelt das Schengen-Abkommen?", o: ["Einheitliche Währung", "Grenzfreier Reiseverkehr", "Einwanderungsgesetze", "Schulpflicht für alle EU-Bürger"], a: "Grenzfreier Reiseverkehr" },
-            { q: "Was ist das Ziel der EU-Außenpolitik?", o: ["Militärische Vorherrschaft", "Zölle auf Einfuhren", "Frieden, Sicherheit, Menschenrechte", "Grenzen schließen"], a: "Frieden, Sicherheit, Menschenrechte" },
-            { q: "Was ist ein Nachteil der EU-Mitgliedschaft?", o: ["Zugang zu neuem Markt", "Wirtschaftswachstum", "Verlust nationaler Souveränität", "Fördergelder"], a: "Verlust nationaler Souveränität" },
-            { q: "Was ist die Europäische Kommission?", o: ["Ein Gerichtshof", "Das Parlament", "Die Regierung der EU", "Ein Hilfswerk"], a: "Die Regierung der EU" },
-            { q: "Was ist die Aufgabe des EU-Parlaments?", o: ["Kontrolle der Mitgliedstaaten", "Entscheid über Außenpolitik", "Gesetzgebung und Kontrolle", "Währungsmanagement"], a: "Gesetzgebung und Kontrolle" },
-            { q: "Welche Stadt ist Hauptsitz des Europäischen Parlaments?", o: ["Brüssel", "Straßburg", "Luxemburg", "Berlin"], a: "Straßburg" },
-            { q: "Was ist ein Vorteil des Euro?", o: ["Keine Kontrolle über Geldmenge", "Vereinfachter Handel", "Höhere Zinsen für alle", "Mehr Steuern"], a: "Vereinfachter Handel" },
-            { q: "Welche Länder profitieren am meisten vom EU-Binnenmarkt?", o: ["Die reichsten Länder", "Die kleinsten Länder", "Die EU-Neumitglieder", "Alle Mitgliedstaaten"], a: "Alle Mitgliedstaaten" },
-            { q: "Was regelt das Dublin-Abkommen?", o: ["Die Euro-Einführung", "Wer Asylgesuche bearbeiten muss", "Studienaufenthalte", "Gemeinsame Grenzkontrollen"], a: "Wer Asylgesuche bearbeiten muss" },
-            { q: "Was ist ein Ziel der EU bis 2020 laut der Strategie ‚Europa 2020‘?", o: ["Keine Steuern mehr", "75 % Beschäftigung der 20-64-Jährigen", "Keine Migration", "Einführung des Dollars"], a: "75 % Beschäftigung der 20-64-Jährigen" },
-            { q: "Wie viele Staaten nutzen den Euro als Währung (Eurozone)?", o: ["8", "15", "19", "27"], a: "19" },
-            { q: "Was bedeutet das Cassis-de-Dijon-Prinzip?", o: ["Nur französische Produkte sind erlaubt", "Produkte dürfen in jedem EU-Land verkauft werden, wenn sie im Ursprungsland zugelassen sind", "Keine Lebensmittelimporte", "Wer importiert, zahlt Strafzölle"], a: "Produkte dürfen in jedem EU-Land verkauft werden, wenn sie im Ursprungsland zugelassen sind" },
-            { q: "Welche Institution ist für die Geldpolitik in der Eurozone zuständig?", o: ["Europäischer Rat", "Europäische Zentralbank", "EU-Parlament", "Kommission"], a: "Europäische Zentralbank" },
-            { q: "Welche Freiheit gehört zur Kapitalfreiheit?", o: ["Jeder darf Aktien kaufen, wo er will", "Keine Steuern zahlen", "Kostenlos wohnen", "Bargeldverbot"], a: "Jeder darf Aktien kaufen, wo er will" },
-            { q: "Was ist ein Vorteil der EU für Studierende?", o: ["Studiengebühren entfallen", "Freier Zugang zu Bildung und Austauschprogrammen wie Erasmus", "Kostenloser Wohnraum", "Diplom ohne Prüfung"], a: "Freier Zugang zu Bildung und Austauschprogrammen wie Erasmus" },
-            { q: "Was ist ein bilaterales Abkommen?", o: ["Vertrag zwischen zwei Staaten", "Militärbündnis", "Vertrag mit allen EU-Staaten", "Umweltgesetz"], a: "Vertrag zwischen zwei Staaten" },
-            { q: "Was kann ein Nachteil für kleinere Firmen im Binnenmarkt sein?", o: ["Günstige Produkte", "Zu viele Kunden", "Hoher Konkurrenzdruck", "Weniger Bürokratie"], a: "Hoher Konkurrenzdruck" },
-            { q: "Welche Organisation ist KEIN Teil der EU-Institutionen?", o: ["Europäischer Gerichtshof", "Europäisches Parlament", "Europäische Kommission", "Internationaler Währungsfonds (IWF)"], a: "Internationaler Währungsfonds (IWF)" },
-        ];
+    { q: "Wie viele Mitgliedstaaten hat die Europäische Union aktuell?", o: ["19", "20", "27", "30"], a: "27" },
+    { q: "Welche Institution der EU ist direkt vom Volk gewählt?", o: ["Europäischer Rat", "Europäische Kommission", "Europäisches Parlament", "Ministerrat"], a: "Europäisches Parlament" },
+    { q: "Was sind die vier Grundfreiheiten der EU?", o: ["Gleichheit, Brüderlichkeit, Freiheit, Recht", "Warenverkehr, Personenfreizügigkeit, Dienstleistungen, Kapitalverkehr", "Meinungsfreiheit, Religionsfreiheit, Eigentumsfreiheit, Bewegungsfreiheit", "Staatsangehörigkeit, Reisen, Arbeit, Bildung"], a: "Warenverkehr, Personenfreizügigkeit, Dienstleistungen, Kapitalverkehr" },
+    { q: "Wann wurde die Europäische Union offiziell gegründet?", o: ["1945", "1957", "1973", "1992"], a: "1992" },
+    { q: "Welcher Vertrag gründete die EU?", o: ["Vertrag von Paris", "Vertrag von Maastricht", "Vertrag von Lissabon", "Römische Verträge"], a: "Vertrag von Maastricht" },
+    { q: "Welcher dieser Staaten ist KEIN Mitglied der EU?", o: ["Norwegen", "Polen", "Italien", "Spanien"], a: "Norwegen" },
+    { q: "Welche Währung nutzen die meisten EU-Staaten?", o: ["Euro", "Dollar", "Pfund", "Franken"], a: "Euro" },
+    { q: "Was bedeutet Personenfreizügigkeit in der EU?", o: ["Freier Zugang zu allen Unis", "Reisefreiheit nur für Männer", "Arbeiten, wohnen und studieren in jedem EU-Staat", "Kostenlose Staatsbürgerschaft"], a: "Arbeiten, wohnen und studieren in jedem EU-Staat" },
+    { q: "Welches Land ist KEIN Mitglied der Euro-Zone?", o: ["Deutschland", "Italien", "Ungarn", "Spanien"], a: "Ungarn" },
+    { q: "Welcher dieser Staaten gehört zur EU, aber nicht zur Eurozone?", o: ["Frankreich", "Dänemark", "Griechenland", "Österreich"], a: "Dänemark" },
+    { q: "Was fördert die EU mit ihren Agrarsubventionen?", o: ["Industrie", "Tourismus", "Landwirtschaft", "IT-Branche"], a: "Landwirtschaft" },
+    { q: "Was versteht man unter Binnenmarkt in der EU?", o: ["Nur lokaler Handel", "Gemeinsamer Markt ohne Grenzen", "Markt für Binnenstaaten", "Ein Markt für Lebensmittel"], a: "Gemeinsamer Markt ohne Grenzen" },
+    { q: "Was regelt das Schengen-Abkommen?", o: ["Einheitliche Währung", "Grenzfreier Reiseverkehr", "Einwanderungsgesetze", "Schulpflicht für alle EU-Bürger"], a: "Grenzfreier Reiseverkehr" },
+    { q: "Was ist das Ziel der EU-Außenpolitik?", o: ["Militärische Vorherrschaft", "Zölle auf Einfuhren", "Frieden, Sicherheit, Menschenrechte", "Grenzen schließen"], a: "Frieden, Sicherheit, Menschenrechte" },
+    { q: "Was ist ein Nachteil der EU-Mitgliedschaft?", o: ["Zugang zu neuem Markt", "Wirtschaftswachstum", "Verlust nationaler Souveränität", "Fördergelder"], a: "Verlust nationaler Souveränität" },
+    { q: "Was ist die Europäische Kommission?", o: ["Ein Gerichtshof", "Das Parlament", "Die Regierung der EU", "Ein Hilfswerk"], a: "Die Regierung der EU" },
+    { q: "Was ist die Aufgabe des EU-Parlaments?", o: ["Kontrolle der Mitgliedstaaten", "Entscheid über Außenpolitik", "Gesetzgebung und Kontrolle", "Währungsmanagement"], a: "Gesetzgebung und Kontrolle" },
+    { q: "Welche Stadt ist Hauptsitz des Europäischen Parlaments?", o: ["Brüssel", "Straßburg", "Luxemburg", "Berlin"], a: "Straßburg" },
+    { q: "Was ist ein Vorteil des Euro?", o: ["Keine Kontrolle über Geldmenge", "Vereinfachter Handel", "Höhere Zinsen für alle", "Mehr Steuern"], a: "Vereinfachter Handel" },
+    { q: "Welche Länder profitieren am meisten vom EU-Binnenmarkt?", o: ["Die reichsten Länder", "Die kleinsten Länder", "Die EU-Neumitglieder", "Alle Mitgliedstaaten"], a: "Alle Mitgliedstaaten" },
+    { q: "Was regelt das Dublin-Abkommen?", o: ["Die Euro-Einführung", "Wer Asylgesuche bearbeiten muss", "Studienaufenthalte", "Gemeinsame Grenzkontrollen"], a: "Wer Asylgesuche bearbeiten muss" },
+    { q: "Was ist ein Ziel der EU bis 2020 laut der Strategie ‚Europa 2020‘?", o: ["Keine Steuern mehr", "75 % Beschäftigung der 20-64-Jährigen", "Keine Migration", "Einführung des Dollars"], a: "75 % Beschäftigung der 20-64-Jährigen" },
+    { q: "Wie viele Staaten nutzen den Euro als Währung (Eurozone)?", o: ["8", "15", "19", "27"], a: "19" },
+    { q: "Was bedeutet das Cassis-de-Dijon-Prinzip?", o: ["Nur französische Produkte sind erlaubt", "Produkte dürfen in jedem EU-Land verkauft werden, wenn sie im Ursprungsland zugelassen sind", "Keine Lebensmittelimporte", "Wer importiert, zahlt Strafzölle"], a: "Produkte dürfen in jedem EU-Land verkauft werden, wenn sie im Ursprungsland zugelassen sind" },
+    { q: "Welche Institution ist für die Geldpolitik in der Eurozone zuständig?", o: ["Europäischer Rat", "Europäische Zentralbank", "EU-Parlament", "Kommission"], a: "Europäische Zentralbank" },
+    { q: "Welche Freiheit gehört zur Kapitalfreiheit?", o: ["Jeder darf Aktien kaufen, wo er will", "Keine Steuern zahlen", "Kostenlos wohnen", "Bargeldverbot"], a: "Jeder darf Aktien kaufen, wo er will" },
+    { q: "Was ist ein Vorteil der EU für Studierende?", o: ["Studiengebühren entfallen", "Freier Zugang zu Bildung und Austauschprogrammen wie Erasmus", "Kostenloser Wohnraum", "Diplom ohne Prüfung"], a: "Freier Zugang zu Bildung und Austauschprogrammen wie Erasmus" },
+    { q: "Was ist ein bilaterales Abkommen?", o: ["Vertrag zwischen zwei Staaten", "Militärbündnis", "Vertrag mit allen EU-Staaten", "Umweltgesetz"], a: "Vertrag zwischen zwei Staaten" },
+    { q: "Was kann ein Nachteil für kleinere Firmen im Binnenmarkt sein?", o: ["Günstige Produkte", "Zu viele Kunden", "Hoher Konkurrenzdruck", "Weniger Bürokratie"], a: "Hoher Konkurrenzdruck" },
+    { q: "Welche Organisation ist KEIN Teil der EU-Institutionen?", o: ["Europäischer Gerichtshof", "Europäisches Parlament", "Europäische Kommission", "Internationaler Währungsfonds (IWF)"], a: "Internationaler Währungsfonds (IWF)" },
+];
 
         function updateScoreDisplay() {
             document.getElementById("scoreDisplay").innerText = `Punkte: ${score}`;
             document.getElementById("highscoreDisplay").innerText = `Highscore: ${highscore}`;
-        }
-
-        function gameEnd() {
-            let bonus = correctAnswers === 30 ? 10 : 0;
-            if (bonus > 0) {
-                alert("Gratulation! Fehlerfreies Spiel! +10 Bonuspunkte");
-                score += bonus;
-            }
-            if (score > highscore) {
-                highscore = score;
-            }
-            updateScoreDisplay();
-            alert(`Spiel beendet! Gesamtpunktzahl: ${score}`);
-            document.location.reload();
         }
 
         function drawPacman() {
@@ -112,12 +98,9 @@
 
         function askQuestion() {
             gamePaused = true;
-            if (questions.length === 0) {
-                gameEnd();
-                return;
-            }
-            const questionIndex = Math.floor(Math.random() * questions.length);
-            const question = questions[questionIndex];
+            if (questions.length === 0) return;
+            const index = Math.floor(Math.random() * questions.length);
+            const question = questions.splice(index, 1)[0];
             document.getElementById("question").innerText = question.q;
             const answersDiv = document.getElementById("answers");
             answersDiv.innerHTML = "";
@@ -129,7 +112,6 @@
                     if (option === question.a) {
                         score += 5;
                         correctAnswers++;
-                        alert("Richtig! +5 Punkte");
                     } else {
                         alert("Falsch! Zurück zum Start!");
                         pacman.x = 50;
@@ -153,9 +135,9 @@
         }
 
         function checkCollision() {
-            let dx = pacman.x - fruit.x;
-            let dy = pacman.y - fruit.y;
-            let distance = Math.sqrt(dx * dx + dy * dy);
+            const dx = pacman.x - fruit.x;
+            const dy = pacman.y - fruit.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
             if (fruit.active && distance < pacman.size + fruit.size) {
                 fruit.active = false;
                 askQuestion();
@@ -164,9 +146,9 @@
 
         function moveGhost() {
             if (!gamePaused) {
-                let dx = pacman.x - ghost.x;
-                let dy = pacman.y - ghost.y;
-                let dist = Math.sqrt(dx * dx + dy * dy);
+                const dx = pacman.x - ghost.x;
+                const dy = pacman.y - ghost.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
                 ghost.x += (dx / dist) * 0.5;
                 ghost.y += (dy / dist) * 0.5;
 
